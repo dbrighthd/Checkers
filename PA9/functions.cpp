@@ -1088,6 +1088,51 @@ void game_loop()
 				}
 			}
 		}
+		
+		                           // Win and lose situation - Results
+		    
+		   bool BlueGameOver, WhiteGameOver;  // = true for both?
+
+			     // The game over if either side has no piece remaining
+
+		for (int i = 0; i < 12; i++)
+		{
+		 // If there more are pieces of certain color off the board, then that color lost
+
+			if ((int(BluePieces[i].getXLocation()) == 500 && int(BluePieces[i].getYLocation()) == 500)
+		    < (int(WhitePieces[i].getXLocation()) == 500 && int(WhitePieces[i].getYLocation()) == 500))
+			{
+				BlueGameOver = false;   // Blue has less pieces off the board, so Blue wins
+			}
+
+
+			else if ((int(BluePieces[i].getXLocation()) == 500 && int(BluePieces[i].getYLocation()) == 500)
+				> (int(WhitePieces[i].getXLocation()) == 500 && int(WhitePieces[i].getYLocation()) == 500))
+			{
+				
+				WhiteGameOver = false;  // Blue has more pieces off the board so loses, white wins
+			}
+	   
+		}
+
+			if (BlueGameOver == true)   
+			{
+				cout << "WHITE is the winner, Blue lost!" << endl;
+			}
+
+			else if (WhiteGameOver == true)   
+			{
+				cout << "BLUE is the winner, White lost!" << endl;
+			}
+
+			// There are the same amount of disappearing pieces in both sides
+			else
+			{
+				cout << "All pieces have disappeared, this is a TIE!" << endl;
+			}
+
+			                     // End of win and lose situation - End of reults
+		
 
 		window.clear();
 
