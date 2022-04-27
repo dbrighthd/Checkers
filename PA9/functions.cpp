@@ -2,7 +2,7 @@
 
 void game_loop()
 {
-	//Initialize variables: 
+	// Initialize variables: 
 	sf::RenderWindow window(sf::VideoMode(400, 400), "Checkers!");
 	Board gameBoard;
 	sf::Color redTile = sf::Color::Red;
@@ -107,29 +107,29 @@ void game_loop()
 			if (event.type == sf::Event::MouseButtonReleased)
 			{
 				// Get position of click: 
-				xPos = sf::Mouse::getPosition(window).x;
-				yPos = sf::Mouse::getPosition(window).y;
+				xPos = sf::Mouse::getPosition(window).x; 
+				yPos = sf::Mouse::getPosition(window).y; 
 
 				int vectRow = 0, vectCol = 0;
-				bool firstRun = true;
+				bool firstRun = true; 
 				bool myTurn = true;
-				int dummyX2 = 30, dummyY2 = 30;
+				int dummyX2 = 30, dummyY2 = 30; 
 
 				// Set array values: 
-				vectRow = yPos / 50;
-				vectCol = xPos / 50;
+				vectRow = yPos / 50; 
+				vectCol = xPos / 50; 
 
 				// Check if user clicked a specific token: 
 				for (int i = 0; i < 12; ++i)
 				{
 					int dummyX = int(BluePieces[i].getXLocation()) / 50;
-					int dummyY = int(BluePieces[i].getYLocation()) / 50;
+					int dummyY = int(BluePieces[i].getYLocation()) / 50; 
 
 					// Check for clicking: 
 					if (vectRow == dummyY && vectCol == dummyX)
 					{
 						// Change to active color: 
-						BluePieces[i].setFillColor(active);
+						BluePieces[i].setFillColor(active); 
 
 						// Redraw window: 
 						window.clear();
@@ -155,7 +155,7 @@ void game_loop()
 						// Get another click from the user: 
 						while (!sf::Mouse::isButtonPressed(sf::Mouse::Left))
 						{
-							;
+							; 
 						}
 
 						while (moveOn == false)
@@ -170,7 +170,7 @@ void game_loop()
 								dummyY2 = yPos / 50;
 
 								// Check if piece can be moved straight: 
-								if ((dummyX == dummyX2) && (dummyY == dummyY2 - 1))
+								if ((dummyX == dummyX2 - 1) && (dummyY == dummyY2 - 1))
 								{
 									// Space occupied: 
 									if (gameBoard.getOccupied(dummyX2, dummyY2))
@@ -182,11 +182,43 @@ void game_loop()
 									else
 									{
 										// Move piece: 
-										BluePieces[i].move(0, 50);
+										BluePieces[i].move(50, 50);
 										BluePieces[i].setFillColor(sf::Color::Blue);
 
 										// Reallocate piece location: 
 										BluePieces[i].setYLocation(BluePieces[i].getYLocation() + 50);
+										BluePieces[i].setXLocation(BluePieces[i].getXLocation() + 50); 
+
+										// Update occupied board positions: 
+										gameBoard.setNotOccupied(dummyX, dummyY); 
+										gameBoard.setColor(dummyX, dummyY, NO_TOKEN); 
+
+										gameBoard.setOccupied(dummyX2, dummyY2); 
+										gameBoard.setColor(dummyX2, dummyY2, BLUE_PLAYER); 
+
+										moveOn = true;
+									}
+
+								}
+
+								if ((dummyX == dummyX2 + 1) && (dummyY == dummyY2 - 1))
+								{
+									// Space occupied: 
+									if (gameBoard.getOccupied(dummyX2, dummyY2))
+									{
+										cout << "This spot is taken!" << endl;
+									}
+
+									// Space not occupied: 
+									else
+									{
+										// Move piece: 
+										BluePieces[i].move(-50, 50);
+										BluePieces[i].setFillColor(sf::Color::Blue);
+
+										// Reallocate piece location: 
+										BluePieces[i].setYLocation(BluePieces[i].getYLocation() + 50);
+										BluePieces[i].setXLocation(BluePieces[i].getXLocation() - 50); 
 
 										// Update occupied board positions: 
 										gameBoard.setNotOccupied(dummyX, dummyY);
@@ -206,12 +238,12 @@ void game_loop()
 									// Piece is taken: 
 									if (gameBoard.getOccupied(dummyX2, dummyY2))
 									{
-										cout << "This spot is taken!" << endl;
+										cout << "This spot is taken!" << endl; 
 									}
 
 									else if (gameBoard.getColor(dummyX2 - 1, dummyY2 - 1) != WHITE_PLAYER)
 									{
-										cout << "NO Whites here" << endl;
+										cout << "NO Whites here" << endl; 
 									}
 
 									// Piece not taken: 
@@ -229,10 +261,26 @@ void game_loop()
 
 										// Update occupied board logic: 
 										gameBoard.setNotOccupied(dummyX, dummyY);
-										gameBoard.setColor(dummyX, dummyY, NO_TOKEN);
+										gameBoard.setColor(dummyX, dummyY, NO_TOKEN); 
 
 										gameBoard.setOccupied(dummyX2, dummyY2);
-										gameBoard.setColor(dummyX2, dummyY2, BLUE_PLAYER);
+										gameBoard.setColor(dummyX2, dummyY2, BLUE_PLAYER); 
+
+										for (int enemy = 0; enemy < 12; ++enemy)
+										{
+											if ((int(WhitePieces[enemy].getXLocation()) / 50 == (dummyX2 - 1)) &&
+												(int(WhitePieces[enemy].getYLocation()) / 50 == (dummyY2 - 1)))
+											{
+												// Get piece off the board: 
+												WhitePieces[enemy].move(500, 500);
+
+												WhitePieces[enemy].setXLocation(500);
+												WhitePieces[enemy].setYLocation(500);
+
+												gameBoard.setNotOccupied(dummyX2 - 1, dummyY2 - 1);
+												gameBoard.setColor(dummyX2 - 1, dummyY2 - 1, NO_TOKEN); 
+											}
+										}
 									}
 
 								}
@@ -243,7 +291,7 @@ void game_loop()
 									// Tile occupied: 
 									if (gameBoard.getOccupied(dummyX2, dummyY2))
 									{
-										cout << "This spot is taken!" << endl;
+										cout << "This spot is taken!" << endl; 
 									}
 
 									else if (gameBoard.getColor(dummyX2 + 1, dummyY2 - 1) != WHITE_PLAYER)
@@ -266,10 +314,26 @@ void game_loop()
 
 										// Update tile occupied status: 
 										gameBoard.setNotOccupied(dummyX, dummyY);
-										gameBoard.setColor(dummyX, dummyY, NO_TOKEN);
+										gameBoard.setColor(dummyX, dummyY, NO_TOKEN); 
 
 										gameBoard.setOccupied(dummyX2, dummyY2);
-										gameBoard.setColor(dummyX2, dummyY2, BLUE_PLAYER);
+										gameBoard.setColor(dummyX2, dummyY2, BLUE_PLAYER); 
+
+										for (int enemy = 0; enemy < 12; ++enemy)
+										{
+											if ((int(WhitePieces[enemy].getXLocation()) / 50 == (dummyX2 + 1)) &&
+												(int(WhitePieces[enemy].getYLocation()) / 50 == (dummyY2 - 1)))
+											{
+												// Get piece off the board: 
+												WhitePieces[enemy].move(500, 500); 
+
+												WhitePieces[enemy].setXLocation(500); 
+												WhitePieces[enemy].setYLocation(500); 
+
+												gameBoard.setNotOccupied(dummyX2 + 1, dummyY2 - 1); 
+												gameBoard.setColor(dummyX2 + 1, dummyY2 - 1, NO_TOKEN); 
+											}
+										}
 									}
 								}
 
@@ -281,7 +345,7 @@ void game_loop()
 							}
 
 							cout << dummyX2 << " " << dummyY2 << endl;
-						}
+						} 
 
 						cout << "Ended" << endl;
 
@@ -289,7 +353,7 @@ void game_loop()
 						playerTurn = WHITE_PLAYER;
 					}
 				}
-			}
+			} 
 
 		}
 
@@ -364,7 +428,37 @@ void game_loop()
 								dummyY2 = yPos / 50;
 
 								// Check if piece can be moved straight: 
-								if ((dummyX == dummyX2) && (dummyY == dummyY2 + 1))
+								if ((dummyX == dummyX2 + 1) && (dummyY == dummyY2 + 1))
+								{
+									// If tile is occupied: 
+									if (gameBoard.getOccupied(dummyX2, dummyY2))
+									{
+										cout << "This spot is taken!"  << endl;
+									}
+
+									// Tile not occupied: 
+									else
+									{
+										// Move piece: 
+										WhitePieces[i].move(-50, -50);
+										WhitePieces[i].setFillColor(sf::Color::White);
+
+										// Set new tile location: 
+										WhitePieces[i].setYLocation(WhitePieces[i].getYLocation() - 50);
+										WhitePieces[i].setXLocation(WhitePieces[i].getXLocation() - 50); 
+
+										// Update board occupied status: 
+										gameBoard.setNotOccupied(dummyX, dummyY);
+										gameBoard.setColor(dummyX, dummyY, NO_TOKEN); 
+
+										gameBoard.setOccupied(dummyX2, dummyY2);
+										gameBoard.setColor(dummyX2, dummyY2, WHITE_PLAYER); 
+
+										moveOn = true;
+									}
+								}
+
+								if ((dummyX == dummyX2 - 1) && (dummyY == dummyY2 + 1))
 								{
 									// If tile is occupied: 
 									if (gameBoard.getOccupied(dummyX2, dummyY2))
@@ -376,11 +470,12 @@ void game_loop()
 									else
 									{
 										// Move piece: 
-										WhitePieces[i].move(0, -50);
+										WhitePieces[i].move(+50, -50);
 										WhitePieces[i].setFillColor(sf::Color::White);
 
 										// Set new tile location: 
 										WhitePieces[i].setYLocation(WhitePieces[i].getYLocation() - 50);
+										WhitePieces[i].setXLocation(WhitePieces[i].getXLocation() + 50);
 
 										// Update board occupied status: 
 										gameBoard.setNotOccupied(dummyX, dummyY);
@@ -399,12 +494,12 @@ void game_loop()
 									// Tile occupied: 
 									if (gameBoard.getOccupied(dummyX2, dummyY2))
 									{
-										cout << "This spot is taken!" << endl;
+										cout << "This spot is taken!" << endl; 
 									}
 
 									else if (gameBoard.getColor(dummyX2 + 1, dummyY2 + 1) != BLUE_PLAYER)
 									{
-										cout << "No blues here" << endl;
+										cout << "No blues here" << endl; 
 									}
 
 									// Tile not occupied: 
@@ -422,10 +517,26 @@ void game_loop()
 
 										// Update board occupied status: 
 										gameBoard.setNotOccupied(dummyX, dummyY);
-										gameBoard.setColor(dummyX, dummyY, NO_TOKEN);
+										gameBoard.setColor(dummyX, dummyY, NO_TOKEN); 
 
 										gameBoard.setOccupied(dummyX2, dummyY2);
-										gameBoard.setColor(dummyX2, dummyY2, WHITE_PLAYER);
+										gameBoard.setColor(dummyX2, dummyY2, WHITE_PLAYER); 
+
+										for (int enemy = 0; enemy < 12; ++enemy)
+										{
+											if ((int(BluePieces[enemy].getXLocation()) / 50 == (dummyX2 + 1)) &&
+												(int(BluePieces[enemy].getYLocation()) / 50 == (dummyY2 + 1)))
+											{
+												// Get piece off the board: 
+												BluePieces[enemy].move(500, 500);
+
+												BluePieces[enemy].setXLocation(500);
+												BluePieces[enemy].setYLocation(500);
+
+												gameBoard.setNotOccupied(dummyX2 + 1, dummyY2 + 1);
+												gameBoard.setColor(dummyX2 + 1, dummyY2 + 1, NO_TOKEN); 
+											}
+										}
 									}
 
 
@@ -436,12 +547,12 @@ void game_loop()
 								{
 									if (gameBoard.getOccupied(dummyX2, dummyY2))
 									{
-										cout << "This spot is taken!" << endl;
+										cout << "This spot is taken!" << endl; 
 									}
 
 									else if (gameBoard.getColor(dummyX2 - 1, dummyY2 + 1) != BLUE_PLAYER)
 									{
-										cout << "NO blues here" << endl;
+										cout << "NO blues here" << endl; 
 									}
 
 									else
@@ -458,10 +569,26 @@ void game_loop()
 
 										// Update board occupied status: 
 										gameBoard.setNotOccupied(dummyX, dummyY);
-										gameBoard.setColor(dummyX, dummyY, NO_TOKEN);
+										gameBoard.setColor(dummyX, dummyY, NO_TOKEN); 
 
 										gameBoard.setOccupied(dummyX2, dummyY2);
-										gameBoard.setColor(dummyX2, dummyY2, WHITE_PLAYER);
+										gameBoard.setColor(dummyX2, dummyY2, WHITE_PLAYER); 
+
+										for (int enemy = 0; enemy < 12; ++enemy)
+										{
+											if ((int(BluePieces[enemy].getXLocation()) / 50 == (dummyX2 - 1)) &&
+												(int(BluePieces[enemy].getYLocation()) / 50 == (dummyY2 + 1)))
+											{
+												// Get piece off the board: 
+												BluePieces[enemy].move(500, 500);
+
+												BluePieces[enemy].setXLocation(500);
+												BluePieces[enemy].setYLocation(500);
+
+												gameBoard.setNotOccupied(dummyX2 - 1, dummyY2 + 1);
+												gameBoard.setColor(dummyX2 - 1, dummyY2 + 1, NO_TOKEN); 
+											}
+										}
 									}
 
 
@@ -499,5 +626,5 @@ void game_loop()
 		}
 
 		window.display();
-	}
+	}	
 }
