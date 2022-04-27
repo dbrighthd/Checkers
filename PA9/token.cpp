@@ -29,3 +29,8 @@ void Token::setKing(void)
 {
 	this->mKing = true; 	
 }
+
+void Token::checkKing(void)
+{
+	return this->mKing; 
+}
