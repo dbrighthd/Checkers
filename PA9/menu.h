@@ -34,6 +34,9 @@ public:
 
 	    // This function displays an image for saying bye
 	void byeImage(sf::RenderWindow& window_play);
+	
+	 // This function displays an image for the winner
+	void winnerImage(sf::RenderWindow& window_play);
 
 public:
 
