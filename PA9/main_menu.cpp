@@ -124,6 +124,9 @@ int main(void)
 					     // adding the game loop
 					game_loop();
 					
+					     // Display the winner image then
+					menu.winnerImage(window_play);
+					
 					window_play.display();
 				}
 
