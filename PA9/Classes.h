@@ -60,7 +60,7 @@ private:
 	bool mIsActive;
 	double mXPos;
 	double mYPos;
-
+	bool mKing; 
 
 
 public:
@@ -72,6 +72,7 @@ public:
 		this->setPosition(pos);
 		this->setRadius(radius);
 		this->setFillColor(color);
+		this->mKing = false; 
 	}
 
 	void setNewFillColor(sf::Color newColor);
@@ -81,7 +82,7 @@ public:
 
 	void setXLocation(double newXLocation);
 	void setYLocation(double newYLocation);
-
+	void setKing(void); 
 
 };
 
