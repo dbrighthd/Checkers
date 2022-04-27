@@ -83,6 +83,8 @@ public:
 	void setXLocation(double newXLocation);
 	void setYLocation(double newYLocation);
 	void setKing(void); 
+	
+	bool checkKing(void); 
 
 };
 
