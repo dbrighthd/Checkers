@@ -140,3 +140,15 @@ void Menu:: byeImage(sf::RenderWindow& window_play)
 	window_play.draw(text);
 
 }
+
+void Menu::winnerImage(sf::RenderWindow& window_play)
+{
+	// Displaying a good-bye image
+	sf::Texture texture;
+	texture.loadFromFile("Assets/winnerImage.jpg");
+	sf::Sprite image;
+	image.setTexture(texture);
+	image.setScale(0.6f, 0.7f);
+	window_play.draw(image);
+
+}
