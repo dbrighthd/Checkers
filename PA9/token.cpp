@@ -24,3 +24,8 @@ void Token::setYLocation(double newYLocation)
 {
 	this->mYPos = newYLocation;
 }
+
+void Token::setKing(void)
+{
+	this->mKing = true; 	
+}
