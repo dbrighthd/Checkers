@@ -1116,10 +1116,10 @@ void game_loop()
 			}
 
 			     // There are the same amount of disappearing pieces in both sides
-		    else
-		    {
-		    	cout << "All pieces have disappeared, this is a TIE!" << endl;
-		    }
+		   // else
+		   // {
+		    	//cout << "All pieces have disappeared, this is a TIE!" << endl;
+		   // }
 
 		}
 
