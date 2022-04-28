@@ -13,6 +13,12 @@ void game_loop()
 	Token BluePieces[12];
 	Token WhitePieces[12];
 	double xTokenPos = 10, yTokenPos = 10;
+	
+	              // Has been added
+	
+	  // Number of token of each player      
+	int blue_num_token = 12;      
+	int  white_num_token = 12;      
 
 	// Set player turn: 
 	int playerTurn = BLUE_PLAYER;
@@ -329,6 +335,11 @@ void game_loop()
 
 												gameBoard.setNotOccupied(dummyX2 - 1, dummyY2 - 1);
 												gameBoard.setColor(dummyX2 - 1, dummyY2 - 1, NO_TOKEN); 
+												
+												// Has been added
+ 
+										           // Decrementing the number of token after being captured
+												white_num_token--;
 											}
 										}
 									}
@@ -398,6 +409,11 @@ void game_loop()
 
 												gameBoard.setNotOccupied(dummyX2 + 1, dummyY2 - 1); 
 												gameBoard.setColor(dummyX2 + 1, dummyY2 - 1, NO_TOKEN); 
+												
+												  // Has been added
+ 
+										           // Decrementing the number of token after being captured
+												white_num_token--;
 											}
 										}
 									}
@@ -535,6 +551,12 @@ void game_loop()
 
 												gameBoard.setNotOccupied(dummyX2 + 1, dummyY2 + 1);
 												gameBoard.setColor(dummyX2 + 1, dummyY2 + 1, NO_TOKEN);
+												
+												
+												// Has been added
+ 
+										           // Decrementing the number of token after being captured
+												white_num_token--;
 											}
 										}
 									}
@@ -592,6 +614,12 @@ void game_loop()
 
 												gameBoard.setNotOccupied(dummyX2 - 1, dummyY2 + 1);
 												gameBoard.setColor(dummyX2 - 1, dummyY2 + 1, NO_TOKEN);
+												
+												   // Has been added
+ 
+										           // Decrementing the number of token after being captured
+												white_num_token--;
+											
 											}
 										}
 									}
@@ -841,6 +869,11 @@ void game_loop()
 
 												gameBoard.setNotOccupied(dummyX2 + 1, dummyY2 + 1);
 												gameBoard.setColor(dummyX2 + 1, dummyY2 + 1, NO_TOKEN); 
+												
+												     // Has been added
+													  
+												// Decrementing the number of token after being captured
+												blue_num_token--;
 											}
 										}
 									}
@@ -907,6 +940,12 @@ void game_loop()
 
 												gameBoard.setNotOccupied(dummyX2 - 1, dummyY2 + 1);
 												gameBoard.setColor(dummyX2 - 1, dummyY2 + 1, NO_TOKEN); 
+												
+												
+												       // Has been added
+													  
+												// Decrementing the number of token after being captured
+												blue_num_token--;
 											}
 										}
 									}
@@ -1019,6 +1058,11 @@ void game_loop()
 
 												gameBoard.setNotOccupied(dummyX2 - 1, dummyY2 - 1);
 												gameBoard.setColor(dummyX2 - 1, dummyY2 - 1, NO_TOKEN);
+												
+												    // Has been added
+													  
+												// Decrementing the number of token after being captured
+												blue_num_token--;
 											}
 										}
 									}
@@ -1071,6 +1115,12 @@ void game_loop()
 
 												gameBoard.setNotOccupied(dummyX2 + 1, dummyY2 - 1);
 												gameBoard.setColor(dummyX2 + 1, dummyY2 - 1, NO_TOKEN);
+												
+												
+												      // Has been added
+													  
+												// Decrementing the number of token after being captured
+												blue_num_token--;
 											}
 										}
 									}
@@ -1089,7 +1139,7 @@ void game_loop()
 			}
 		}
 		
-		                           // Start of Win and lose situation - Results
+		                         		                 // Start of Win and lose situation - Results
 
 		bool BlueGameOver = true, WhiteGameOver = true;
 
@@ -1098,32 +1148,32 @@ void game_loop()
 		for (int i = 0; i < 12; i++)
 		{
 			// If there more are pieces of certain color off the board, then that color lost
+			// Also, if the number of token of a specific color is 0, then that color lost
 
-			if ((int(BluePieces[i].getXLocation()) == 500 && int(BluePieces[i].getYLocation()) == 500)
-				< (int(WhitePieces[i].getXLocation()) == 500 && int(WhitePieces[i].getYLocation()) == 500))
+			if (white_num_token == 0 && (int(BluePieces[i].getXLocation()) == 500 &&
+				int(BluePieces[i].getYLocation()) == 500) < (int(WhitePieces[i].getXLocation()) == 500 &&
+					int(WhitePieces[i].getYLocation()) == 500))
 			{
 				BlueGameOver = false;   // Blue has less pieces off the board, so Blue wins
+				                       // White has 0 token left on the board, so White loses
 				cout << "BLUE is the winner, White lost!" << endl;
 			}
 
 
-			else if ((int(BluePieces[i].getXLocation()) == 500 && int(BluePieces[i].getYLocation()) == 500)
-				> (int(WhitePieces[i].getXLocation()) == 500 && int(WhitePieces[i].getYLocation()) == 500))
+			else if (blue_num_token == 0 && (int(BluePieces[i].getXLocation()) == 500 &&
+				int(BluePieces[i].getYLocation()) == 500) > (int(WhitePieces[i].getXLocation()) == 500 && 
+					int(WhitePieces[i].getYLocation()) == 500))
 			{
 
-				WhiteGameOver = false;  // Blue has more pieces off the board so loses, white wins
+				WhiteGameOver = false;  // Blue has more pieces off the board so loses, White wins
+				                      // Blue has 0 token left on the board, so White wins
 				cout << "WHITE is the winner, Blue lost!" << endl;
 			}
 
-			     // There are the same amount of disappearing pieces in both sides
-		   // else
-		   // {
-		    	//cout << "All pieces have disappeared, this is a TIE!" << endl;
-		   // }
-
 		}
 
-		                    // End of Win and lose situation - End of reults
+		        // End of Win and lose situation - End of reults
+		
 
 		window.clear();
 
