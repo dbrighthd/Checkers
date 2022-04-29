@@ -16,6 +16,11 @@ void game_loop()
 
 	// Set player turn: 
 	int playerTurn = BLUE_PLAYER;
+	
+	// Number of token of each player
+	int blue_num_token = 12;
+	int white_num_token = 12;
+	
 
 	// Set blue piece location: 
 	for (int i = 0; i < 12; ++i)
