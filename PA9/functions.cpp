@@ -133,6 +133,7 @@ void game_loop()
 					// Check for clicking: 
 					if (vectRow == dummyY && vectCol == dummyX)
 					{
+						int deselect = 0;
 						// Change to active color: 
 						BluePieces[i].setFillColor(active);
 
@@ -144,7 +145,7 @@ void game_loop()
 						{
 							;
 						}
-
+						
 						while (moveOn == false)
 						{
 							if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
@@ -213,19 +214,38 @@ void game_loop()
 								}
 
 								// Deselecting piece: 
-								if ((dummyX == dummyX2) && (dummyY == dummyY2))
+								else
 								{
+									 if (BluePieces[i].getFillColor() == active)
+									 {
+										 deselect = 1;
+										 if (BluePieces[i].checkKing())
+										 {
+											 BluePieces[i].setFillColor(sf::Color::Cyan);
+										 }
 
+										 else
+										 {
+											 BluePieces[i].setFillColor(sf::Color::Blue);
+
+										 }
+										 break;
+									 }
+									
 								}
 							}
 
 							//cout << dummyX2 << " " << dummyY2 << endl;
 						}
 
-						cout << "Ended" << endl;
+						
 
 						// Switch user:
-						playerTurn = WHITE_PLAYER;
+						if (deselect == 0)
+						{
+							cout << "Ended" << endl;
+							playerTurn = WHITE_PLAYER;
+						}
 					}
 				}
 			}
@@ -261,6 +281,7 @@ void game_loop()
 					// Check for clicking: 
 					if (vectRow == dummyY && vectCol == dummyX)
 					{
+						int deselect = 0;
 						// Change fill color: 
 						WhitePieces[i].setFillColor(active);
 
@@ -343,30 +364,52 @@ void game_loop()
 									// Decrementing the number of token after being captured
 									blue_num_token--;
 								}
+								else
+								{
+									if (WhitePieces[i].getFillColor() == active)
+									{
+										deselect = 1;
+										if (WhitePieces[i].checkKing())
+										{
+											WhitePieces[i].setFillColor(sf::Color::Green);
+										}
+
+										else
+										{
+											WhitePieces[i].setFillColor(sf::Color::White);
+
+										}
+										break;
+									}
+								}
+
+								//cout << dummyX2 << " " << dummyY2 << endl;
 							}
 
-							//cout << dummyX2 << " " << dummyY2 << endl;
+							//cout << "Ended" << endl;
+
+							// Switch user:
+							if (deselect == 0)
+							{
+								playerTurn = BLUE_PLAYER;
+							}
 						}
-
-						//cout << "Ended" << endl;
-
-						// Switch user:
-						playerTurn = BLUE_PLAYER;
 					}
 				}
 			}
 		}
-
 		// Start of Win and lose situation - Results
 
 		if (white_num_token == 0)
 		{
 			// Also, if the number of token of a specific color is 0, then that color lost
 			cout << "BLUE is the winner, White lost!" << endl;
+			window.close();
 		}
 		else if (blue_num_token == 0)
 		{
 			cout << "WHITE is the winner, Blue lost!" << endl;
+			window.close();
 		}
 
 		// End of Win and lose situation - End of results

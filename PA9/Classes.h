@@ -99,6 +99,7 @@ public:
 
 	double getXLocation(void);
 	double getYLocation(void);
+	
 
 	void setXLocation(double newXLocation);
 	void setYLocation(double newYLocation);
