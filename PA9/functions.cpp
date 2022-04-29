@@ -17,6 +17,11 @@ void game_loop()
 	// Set player turn: 
 	int playerTurn = BLUE_PLAYER;
 
+	// Number of token of each player
+	int blue_num_token = 12;
+	int white_num_token = 12;
+
+
 	// Set blue piece location: 
 	for (int i = 0; i < 12; ++i)
 	{
@@ -166,11 +171,15 @@ void game_loop()
 								{
 									moveOn = attack1(gameBoard, dummyX, dummyX2, dummyY, dummyY2, BluePieces[i],
 										WhitePieces);
+									// Decrementing the number of token after being captured
+									white_num_token--;
 								}
 								if ((dummyX == dummyX2 + 2) && (dummyY == dummyY2 - 2))
 								{
 									moveOn = attack2(gameBoard, dummyX, dummyX2, dummyY, dummyY2, BluePieces[i],
 										WhitePieces);
+									// Decrementing the number of token after being captured
+									white_num_token--;
 								}
 
 								// Check if piece is a king and moves backwards normally: 
@@ -178,6 +187,7 @@ void game_loop()
 								{
 									moveOn = kingMoveNormal1(gameBoard, dummyX, dummyX2, dummyY, dummyY2,
 										BluePieces[i]);
+
 								}
 								if ((dummyX == dummyX2 - 1) && (dummyY = dummyY2 + 1) && BluePieces[i].checkKing())
 								{
@@ -190,12 +200,16 @@ void game_loop()
 								{
 									moveOn = kingAttack1(gameBoard, dummyX, dummyX2, dummyY, dummyY2,
 										BluePieces[i], WhitePieces);
+									// Decrementing the number of token after being captured
+									white_num_token--;
 								}
 
 								if ((dummyX == dummyX2 - 2) && (dummyY == dummyY2 + 2) && BluePieces[i].checkKing())
 								{
 									moveOn = kingAttack2(gameBoard, dummyX, dummyX2, dummyY, dummyY2,
 										BluePieces[i], WhitePieces);
+									// Decrementing the number of token after being captured
+									white_num_token--;
 								}
 
 								// Deselecting piece: 
@@ -288,12 +302,16 @@ void game_loop()
 								{
 									moveOn = attackWhite1(gameBoard, dummyX, dummyX2, dummyY, dummyY2, WhitePieces[i],
 										BluePieces);
+									// Decrementing the number of token after being captured
+									blue_num_token--;
 								}
 
 								if ((dummyX == dummyX2 - 2) && (dummyY == dummyY2 + 2))
 								{
 									moveOn = attackWhite2(gameBoard, dummyX, dummyX2, dummyY, dummyY2, WhitePieces[i],
 										BluePieces);
+									// Decrementing the number of token after being captured
+									blue_num_token--;
 								}
 
 								// Check if piece moves normally as king: 
@@ -314,12 +332,16 @@ void game_loop()
 								{
 									moveOn = kingAttackWhite1(gameBoard, dummyX, dummyX2, dummyY, dummyY2, WhitePieces[i],
 										BluePieces);
+									// Decrementing the number of token after being captured
+									blue_num_token--;
 								}
 
 								if ((dummyX == dummyX2 + 2) && (dummyY == dummyY2 - 2) && WhitePieces[i].checkKing())
 								{
 									moveOn = kingAttackWhite2(gameBoard, dummyX, dummyX2, dummyY, dummyY2, WhitePieces[i],
 										BluePieces);
+									// Decrementing the number of token after being captured
+									blue_num_token--;
 								}
 							}
 
@@ -335,7 +357,21 @@ void game_loop()
 			}
 		}
 
-		// Draw game board: 
+		// Start of Win and lose situation - Results
+
+		if (white_num_token == 0)
+		{
+			// Also, if the number of token of a specific color is 0, then that color lost
+			cout << "BLUE is the winner, White lost!" << endl;
+		}
+		else if (blue_num_token == 0)
+		{
+			cout << "WHITE is the winner, Blue lost!" << endl;
+		}
+
+		// End of Win and lose situation - End of results
+
+// Draw game board: 
 		drawBoard(window, gameBoard, BluePieces, WhitePieces);
 	}
 }
