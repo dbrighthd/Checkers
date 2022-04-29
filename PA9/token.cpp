@@ -1,4 +1,11 @@
 #include "Header.h"
+#include <iostream>
+
+using std::cout;
+using std::endl;
+
+// Board function: 
+
 
 
 void Token::setNewFillColor(sf::Color newColor)
@@ -25,12 +32,12 @@ void Token::setYLocation(double newYLocation)
 	this->mYPos = newYLocation;
 }
 
-void Token::setKing(void)
-{
-	this->mKing = true; 	
-}
-
 bool Token::checkKing(void)
 {
-	return this->mKing; 
+	return this->mKing;
+}
+
+void Token::setKing()
+{
+	mKing = true;
 }

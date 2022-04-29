@@ -102,7 +102,7 @@ public:
 
 	void setXLocation(double newXLocation);
 	void setYLocation(double newYLocation);
-	void setKing(void); 
+	void setKing();
 	
 	bool checkKing(void); 
 
