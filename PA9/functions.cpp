@@ -713,7 +713,7 @@ bool kingMoveNormal1(Board& gameBoard, int dummyX, int dummyX2, int dummyY,
 
 		if (gamePiece.checkKing())
 		{
-			gamePiece.setFillColor(sf::Color::Green);
+			gamePiece.setFillColor(sf::Color::Cyan);
 		}
 		else
 		{
@@ -756,7 +756,7 @@ bool kingMoveNormal2(Board& gameBoard, int dummyX, int dummyX2, int dummyY,
 
 		if (gamePiece.checkKing())
 		{
-			gamePiece.setFillColor(sf::Color::Green);
+			gamePiece.setFillColor(sf::Color::Cyan);
 		}
 		else
 		{

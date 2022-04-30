@@ -1,5 +1,6 @@
 #ifndef Header
 #include"Classes.h"
+#include "Test.h"
 
 void game_loop();
 void drawBoard(sf::RenderWindow& window, Board& gameBoard, Token BluePieces[],	Token WhitePieces[]);

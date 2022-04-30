@@ -7,6 +7,7 @@ int page_number;
 
 int main(void)
 {
+	TestAll();
 	while (true)   // We use that option because the exit section does not accept "break" in a for-loop
 	{
 		// Initialize variables: 
@@ -122,6 +123,7 @@ int main(void)
 				window_play.clear();
 
 				// adding the game loop
+
 				game_loop();
 
 				// Display the winner image then

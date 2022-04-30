@@ -165,8 +165,8 @@
   <ItemGroup>
     <ClCompile Include="functions.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="main_menu.cpp" />
     <ClCompile Include="menu.cpp" />
+    <ClCompile Include="testcases.cpp" />
     <ClCompile Include="tile.cpp" />
     <ClCompile Include="token.cpp" />
   </ItemGroup>
