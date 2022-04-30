@@ -405,6 +405,7 @@ void game_loop()
 			// Also, if the number of token of a specific color is 0, then that color lost
 			cout << "BLUE is the winner, White lost!" << endl;
 			window.close();
+			system("sleep");
 		}
 		else if (blue_num_token == 0)
 		{
